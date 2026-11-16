@@ -1,0 +1,30 @@
+name: OrbitalPlus
+version: '${version}'
+main: dev.winterwonderland.orbitalplus.OrbitalPlus
+api-version: '1.21'
+description: Orbital strike cannons where every number is in the config.
+authors: [Winter Wonderland]
+
+commands:
+  orbital:
+    description: Orbital strike rods and strikes
+    usage: /orbital <list|give|kit|strike|info|links|reload>
+    aliases: [orb]
+
+permissions:
+  orbitalplus.admin:
+    description: Everything below, plus /orbital strike and /orbital reload
+    default: op
+    children:
+      orbitalplus.give: true
+      orbitalplus.use: true
+      orbitalplus.link: true
+  orbitalplus.give:
+    description: /orbital give and /orbital kit
+    default: op
+  orbitalplus.use:
+    description: Fire orbital rods
+    default: op
+  orbitalplus.link:
+    description: Link rods to buttons, levers and pressure plates, and /orbital links
+    default: op

@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev.winterwonderland'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+}
+
+dependencies {
+    // Change this to match your server's Minecraft version if you move to a newer Paper.
+    compileOnly 'io.papermc.paper:paper-api:26.2.build.135-stable'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 25
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xlint:deprecation']
+}
+
+processResources {
+    filesMatching('plugin.yml') { expand(version: project.version) }
+}
+
+jar {
+    archiveFileName = "OrbitalPlus-${project.version}.jar"
+}

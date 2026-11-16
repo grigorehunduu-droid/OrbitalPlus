@@ -1,0 +1,219 @@
+# ==========================================================================
+#  OrbitalPlus - every number here can be changed.
+#  After editing, type  /orbital reload  (no restart needed).
+#  20 ticks = 1 second.
+# ==========================================================================
+
+general:
+  # Safety cap: one strike can never spawn more than this many things
+  # (TNT, skulls, arrows, wolves...). Raise it carefully: too many can freeze the server.
+  max-entities-per-strike: 3000
+  # false = explosions still hurt players and mobs but never break blocks.
+  allow-block-damage: true
+  # false = falling anvils/dripstone vanish when they land instead of staying as blocks.
+  keep-falling-blocks: false
+  # How far (in blocks) a rod can aim.
+  target-range: 300
+  # Beacon beam + sound at the target before the strike lands (0 = instant).
+  warning-delay-ticks: 30
+  # Show "Strike incoming" to the person who fired.
+  announce: true
+  # Write a line in the server log for every strike (who fired it and how much it spawned).
+  log-strikes: true
+
+rod:
+  # The item used as a rod. Any Minecraft item id works, e.g. FISHING_ROD, BLAZE_ROD, STICK.
+  material: FISHING_ROD
+  # {type} becomes the strike name. & colour codes work.
+  name: "&b&lOrbital Rod &7- &f{type}"
+  lore:
+    - "&7Right-click to call down"
+    - "&7an orbital &f{type}&7 strike."
+  # -1 = unlimited uses. Otherwise the rod breaks after this many strikes.
+  uses: -1
+  # Seconds a player must wait between strikes.
+  cooldown-seconds: 3
+  # Make rods shimmer like enchanted items.
+  glint: true
+
+strikes:
+
+  # TNT rain in rings around the target. Ring N holds (N x tnt-per-ring) TNT.
+  nuke:
+    enabled: true
+    rings: 15
+    tnt-per-ring: 8
+    ring-spacing: 3.0
+    center-tnt: 3
+    height: 35            # blocks above the target the TNT starts falling from
+    fuse-ticks: 60
+    fuse-random-ticks: 15 # spreads the explosions out a little
+    explosion-power: 4.0  # vanilla TNT is 4.0
+
+  # A column of TNT straight down that drills a deep hole.
+  stab:
+    enabled: true
+    depth: 80
+    spacing: 2.0
+    columns-radius: 0     # 0 = one column, 1 = 3x3 columns, 2 = 5x5...
+    fuse-ticks: 10
+    fuse-step-ticks: 2    # each lower TNT waits this much longer
+    explosion-power: 4.0
+
+  # Blue (charged) wither skulls raining down in rings.
+  wither_nuke:
+    enabled: true
+    rings: 12
+    skulls-per-ring: 8
+    ring-spacing: 3.0
+    center-skulls: 3
+    height: 30
+    speed: 1.5
+    blue: true            # true = blue "dangerous" skulls, false = black ones
+    explosion-power: 1.5  # vanilla wither skull is 1.0
+
+  # A tight grid of blue wither skulls straight down.
+  wither_stab:
+    enabled: true
+    grid-radius: 2        # 2 = 5x5 skulls, 3 = 7x7...
+    spacing: 1.5
+    waves: 3              # how many times the grid fires
+    wave-delay-ticks: 6
+    height: 40
+    speed: 2.0
+    blue: true
+    explosion-power: 1.5
+
+  # Pointed dripstone dropping in a grid (hurts whatever it lands on).
+  dripstone:
+    enabled: true
+    grid-radius: 1
+    spacing: 1.0
+    height: 40
+    damage-per-block: 3.0
+    max-damage: 40
+  dripstone_nuke:
+    enabled: true
+    rings: 8
+    per-ring: 8
+    ring-spacing: 2.5
+    height: 40
+    damage-per-block: 3.0
+    max-damage: 40
+
+  # Falling anvils.
+  anvil:
+    enabled: true
+    grid-radius: 1
+    spacing: 1.0
+    height: 40
+    damage-per-block: 2.0
+    max-damage: 40
+  anvil_nuke:
+    enabled: true
+    rings: 8
+    per-ring: 8
+    ring-spacing: 2.5
+    height: 40
+    damage-per-block: 2.0
+    max-damage: 40
+
+  # Lit creepers dropping in rings.
+  creeper_nuke:
+    enabled: true
+    rings: 8
+    per-ring: 5
+    ring-spacing: 3.0
+    height: 20
+    charged: true         # charged creepers explode bigger
+    explosion-radius: 3   # vanilla creeper is 3
+    fuse-ticks: 40
+
+  # Warden sonic-boom shockwaves spreading out from the target.
+  warden_nuke:
+    enabled: true
+    rings: 5
+    ring-spacing: 4.0
+    ring-delay-ticks: 6
+    damage: 20.0          # 20 = 10 hearts
+    knockback: 1.8
+    hurt-user: false      # can the person who fired get hit?
+
+  # A grid of lit TNT minecarts.
+  tntcart_nuke:
+    enabled: true
+    grid-radius: 6
+    spacing: 4.0
+    height: 30
+    fuse-ticks: 60
+
+  # A pack of tamed attack wolves.
+  wolf:
+    enabled: true
+    count: 40
+    health: 20.0          # 20 = 10 hearts
+    attack-radius: 24.0   # wolves look for targets this far away
+    attack-players: false # true = wolves also attack other players
+    despawn-after-seconds: 120   # -1 = wolves stay forever
+
+  # Arrows fired in a straight line from where you look.
+  railgun:
+    enabled: true
+    arrows: 90
+    arrows-per-tick: 10
+    speed: 6.0
+    spread: 0.0
+    damage: 20.0
+    arrow-lifetime-seconds: 10
+  # Several parallel lines of arrows.
+  railgun_wide:
+    enabled: true
+    lines: 5
+    line-spacing: 0.8
+    arrows: 60
+    arrows-per-tick: 10
+    speed: 6.0
+    spread: 0.0
+    damage: 20.0
+    arrow-lifetime-seconds: 10
+  # Arrows raining down on the target from the sky.
+  railgun_aerial:
+    enabled: true
+    arrows: 270
+    arrows-per-tick: 30
+    radius: 6.0
+    height: 50
+    speed: 4.0
+    damage: 12.0
+    arrow-lifetime-seconds: 10
+
+  # Freezes every mob and player near the target.
+  stasis:
+    enabled: true
+    radius: 10.0
+    duration-seconds: 8
+    include-players: true
+    include-user: false
+
+
+# Link a rod to a button, lever or pressure plate so pressing it fires the strike:
+#   1. (optional) Hold the rod, sneak and right-click where the strike should land.
+#   2. Sneak and right-click the button / lever / pressure plate with the rod.
+# Skip step 1 and the strike lands on the button/plate itself (a trap).
+# Levers fire when switched on. Break the button/lever/plate to remove the link.
+links:
+  enabled: true
+  # Seconds before the same button/lever/plate can fire again.
+  cooldown-seconds: 5
+
+# Crafting recipes for rods (all off by default). Each shape row has 3 characters;
+# every letter must be listed under ingredients.
+recipes:
+  nuke:
+    enabled: false
+    shape: ["TTT", "TNT", " S "]
+    ingredients: {T: TNT, N: NETHER_STAR, S: FISHING_ROD}
+  wolf:
+    enabled: false
+    shape: ["BBB", "BNB", " S "]
+    ingredients: {B: BONE_BLOCK, N: NETHER_STAR, S: FISHING_ROD}
