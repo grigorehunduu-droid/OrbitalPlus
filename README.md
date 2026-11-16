@@ -33,7 +33,7 @@ Plugin for **Paper 26.x** Minecraft server. Need **Java 25**.
 
 ## Put in server
 
-1. Get `OrbitalPlus-1.0.0.jar` (make it, see below).
+1. Download `OrbitalPlus-1.0.0.jar` from [Releases](https://github.com/grigorehunduu-droid/OrbitalPlus/releases/latest).
 2. Drop in server `plugins` folder.
 3. Restart server.
 4. Done. Config live in `plugins/OrbitalPlus/config.yml`.
